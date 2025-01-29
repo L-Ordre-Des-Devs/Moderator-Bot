@@ -1,6 +1,5 @@
 const { ApplicationCommandOptionType } = require("discord.js");
 const client = require("../index");
-const { LogContent, Levels } = require("../functions/webhookLog.js");
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.guild) {
@@ -29,13 +28,14 @@ client.on("interactionCreate", async (interaction) => {
     cmd.run(client, interaction, args);
 
     // Logs
-    let contents = [
-      new LogContent(Levels.Info, `Author: ${interaction.user.username}`+
-        `\nGuild: ${interaction.guild.name}`+
-        `\nCmd: ${interaction.commandName}`+
-        `\nArgs: ${args}`),
-    ]
-    client.webhookLog.send("Slash interaction", contents);
+    let contents = {
+      'Type': "Slash command",
+      'Author': interaction.user.username,
+      'Channel': interaction.channel.name,
+      'Cmd': interaction.commandName,
+      'Args': args
+    }
+    client.console.table(contents);
   }
 
   // Context Menu Handling
@@ -45,12 +45,13 @@ client.on("interactionCreate", async (interaction) => {
     if (command) command.run(client, interaction);
 
     // Logs
-    let contents = [
-      new LogContent(Levels.Info, `Author: ${interaction.user.username}`+
-        `\nGuild: ${interaction.guild.name}`+
-        `\nCmd: ${interaction.commandName}`),
-    ]
-    client.webhookLog.send("Menu interaction", contents);
+    let contents = {
+      'Type': "Menu interaction",
+      'Author': interaction.user.username,
+      'Channel': interaction.channel.name,
+      'Cmd': interaction.commandName
+    }
+    client.console.table(contents);
   }
 
   // Modal Handling
@@ -60,12 +61,13 @@ client.on("interactionCreate", async (interaction) => {
     if (command) command.run(client, interaction);
 
     // Logs
-    let contents = [
-      new LogContent(Levels.Info, `Author: ${interaction.user.username}`+
-        `\nGuild: ${interaction.guild.name}`+
-        `\nModal: ${interaction.customId}`),
-    ]
-    client.webhookLog.send("Modal interaction", contents);
+    let contents = {
+      'Type': "Modal interaction",
+      'Author': interaction.user.username,
+      'Channel': interaction.channel.name,
+      'Cmd': interaction.commandName
+    }
+    client.console.table(contents);
   }
 
   // Button Handling
@@ -75,12 +77,13 @@ client.on("interactionCreate", async (interaction) => {
     if (btn) btn.run(client, interaction);
 
     //Logs
-    let contents = [
-      new LogContent(Levels.Info, `Author: ${interaction.user.username}`+
-        `\nGuild: ${interaction.guild.name}`+
-        `\nBtn: ${interaction.customId}`),
-    ]
-    client.webhookLog.send("Button interaction", contents);
+    let contents = {
+      'Type': "Button interaction",
+      'Author': interaction.user.username,
+      'Channel': interaction.channel.name,
+      'Cmd': interaction.commandName
+    }
+    client.console.table(contents);
   }
 
   // Select Handling
@@ -90,11 +93,12 @@ client.on("interactionCreate", async (interaction) => {
     if (select) select.run(client, interaction);
 
     //Logs
-    let contents = [
-      new LogContent(Levels.Info, `Author: ${interaction.user.username}`+
-        `\nGuild: ${interaction.guild.name}`+
-        `\nSelect : ${interaction.customId}`)
-    ]
-    client.webhookLog.send("Select interaction", contents);
+    let contents = {
+      'Type': "Select interaction",
+      'Author': interaction.user.username,
+      'Channel': interaction.channel.name,
+      'Cmd': interaction.commandName
+    }
+    client.console.table(contents);
   }
 });

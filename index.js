@@ -4,7 +4,7 @@ const {
         identifyProperties 
     } 
 } = require("@discordjs/ws");
-const { WebhookLog } = require("./functions/webhookLog.js");
+const { WebhookConsole } = require("discord-webhook-console");
 // To show the bot on mobile :D (method from : https://stackoverflow.com/a/77072376)
 identifyProperties.browser = "Discord Android";
 
@@ -18,7 +18,7 @@ let client = new Client({
     ]
 });
 
-client.webhookLog = new WebhookLog(process.env.WEBHOOK_LOG);
+client.console = new WebhookConsole(process.env.WEBHOOK_LOG);
 module.exports = client;
 
 // Global Variables
