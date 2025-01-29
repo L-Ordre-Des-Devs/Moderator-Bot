@@ -2,7 +2,7 @@ const client = require("../index");
 const { GatewayIntentBits, PermissionFlagsBits, Client } = require("discord.js");
 
 client.on("messageCreate", async (message) => {
-    const tokens = message.content.match(/[a-z,0-9]{24}\.[a-z,0-9]{6}\.[a-z,0-9,\_,\-]{38}/gmi);
+    const tokens = message.content.match(/[a-z,0-9,\_,\-]{24}\.[a-z,0-9,\_,\-]{6}\.[a-z,0-9,\_,\-]{38}/gmi);
     if (tokens === null)
         return;
 
@@ -15,9 +15,9 @@ client.on("messageCreate", async (message) => {
         });
         
         tmpclient.login(token).then(_ => {
-            client.console.log("Good token:", `Token valid: ${token}`);
+            client.console.log(`Token valid: ${token}`);
         }).catch(err => {
-            client.console.error("Bad token:", `Token invalid: ${token}`);
+            client.console.error(`Token invalid: ${token}`);
         });
 
         tmpclient.on("ready", () => {
