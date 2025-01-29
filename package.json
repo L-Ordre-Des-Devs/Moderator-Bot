@@ -1,0 +1,17 @@
+{
+  "name": "r2d2",
+  "version": "1.0.0",
+  "description": "gestion de l'Ordre des Devs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --trace-deprecation -r dotenv/config index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mizari",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.7",
+    "glob": "^11.0.0"
+  }
+}
