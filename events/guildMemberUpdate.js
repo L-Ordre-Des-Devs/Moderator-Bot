@@ -1,10 +1,9 @@
 const client = require("../index");
+const colors = require('../functions/colors.js');
 
 client.on("guildMemberUpdate", async (oldMember, newMember) => {
-    // si l'ancien pending est différent du nouveau que le nouveau est false
+	// si l'ancien pending est différent du nouveau que le nouveau est false
 	if(oldMember.pending !== newMember.pending && !newMember.pending){
-        const { console } = client;
-
         // récupération du serv
     	const member = newMember;
       	const { guild } = member;
@@ -25,12 +24,6 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
 
         let role = process.env.WELCOME_ROLE;
         role = guild.roles.cache.get(role);
-        member.roles.add(role).catch(err => console.error(err));
-
-        let content = {
-            message: "New member",
-            member: newMember.username,
-        };
-        console.table(content);
+        member.roles.add(role).catch(err => console.error(`[${colors.FgRed}   Error    ${colors.Reset}]\t❌ guild : ${guild.name}\n\t\terror : ${err}`));
     }
 });
