@@ -1,0 +1,48 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Ticket {
+  id             String    @id
+  channelId      String    @unique @default("")
+  userId         String    @map("user_id")
+  type           String
+  status         String    @default("open")
+  claimedBy      String?   @map("claimed_by")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  closedAt       DateTime? @map("closed_at")
+  lastActivity   DateTime  @default(now()) @map("last_activity")
+  rating         Int?      @map("rating")
+  review_comment String?   @map("review_comment")
+  open_reason    String?   @map("open_reason")
+  close_reason   String?   @map("close_reason")
+
+  @@map("tickets")
+}
+
+model Ban {
+  id          String   @id @default(uuid())
+  guildId     String   @map("guild_id")
+  userId      String   @map("user_id")
+  moderatorId String   @map("moderator_id")
+  reason      String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("bans")
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  ticketId  String   // L'ID du ticket, même s'il est supprimé
+  userId    String   @map("user_id") // ID de l'utilisateur qui a laissé la review
+  rating    Int      // Note (1-5 étoiles)
+  comment   String?  @map("comment") // Commentaire facultatif
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("reviews")
+}
