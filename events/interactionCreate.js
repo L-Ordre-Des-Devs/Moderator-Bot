@@ -1,10 +1,12 @@
-const { ApplicationCommandOptionType } = require("discord.js");
+const { ApplicationCommandOptionType, InteractionType } = require("discord.js");
 const client = require("../index");
 
 client.on("interactionCreate", async (interaction) => {
-  if (!interaction.guild) {
+  if (!interaction.guild && interaction.type === InteractionType.ApplicationCommand) {
     return interaction.reply("Can't do commands in PM :/");
   }
+
+  const { console } = client;
 
   // Slash Command Handling
   if (interaction.isChatInputCommand()) {
@@ -35,7 +37,7 @@ client.on("interactionCreate", async (interaction) => {
       'Cmd': interaction.commandName,
       'Args': args
     }
-    client.console.table(contents);
+    console.table(contents);
   }
 
   // Context Menu Handling
@@ -51,54 +53,81 @@ client.on("interactionCreate", async (interaction) => {
       'Channel': interaction.channel.name,
       'Cmd': interaction.commandName
     }
-    client.console.table(contents);
+    console.table(contents);
   }
 
   // Modal Handling
   else if (interaction.isModalSubmit()){
-    //await interaction.deferReply({ ephemeral: true });
-    const command = client.commandsFiles.get(interaction.customId);
-    if (command) command.run(client, interaction);
+    let modal_name;
+    const { customId } = interaction;
+    if (customId.startsWith("ticket")){
+      modal_name = customId.split("-");
+      interaction.ticketId = modal_name.pop();
+      modal_name = modal_name.join("-");
+    } else {
+      modal_name = customId;
+    }
+
+    const modal = client.commandsFiles.get(modal_name);
+    if (modal) modal.run(client, interaction);
 
     // Logs
     let contents = {
       'Type': "Modal interaction",
       'Author': interaction.user.username,
-      'Channel': interaction.channel.name,
-      'Cmd': interaction.commandName
+      'Channel': interaction.channel?.name,
+      'Cmd': modal_name
     }
-    client.console.table(contents);
+    console.table(contents);
   }
 
   // Button Handling
   else if (interaction.isButton()){
-    //await interaction.deferReply({ ephemeral: true });
-    const btn = client.commandsFiles.get(interaction.customId);
+    let button_name;
+    const { customId } = interaction;
+    if (customId.startsWith("ticket")){
+      button_name = customId.split("-");
+      interaction.ticketId = button_name.pop();
+      button_name = button_name.join("-");
+    } else {
+      button_name = customId;
+    }
+
+    const btn = client.commandsFiles.get(button_name);
     if (btn) btn.run(client, interaction);
 
     //Logs
     let contents = {
       'Type': "Button interaction",
       'Author': interaction.user.username,
-      'Channel': interaction.channel.name,
-      'Cmd': interaction.commandName
+      'Channel': interaction.channel?.name,
+      'Cmd': button_name
     }
-    client.console.table(contents);
+    console.table(contents);
   }
 
   // Select Handling
   else if (interaction.isStringSelectMenu()){
-    //await interaction.deferReply({ ephemeral: true });
-    const select = client.commandsFiles.get(interaction.customId);
+    let select_name;
+    const { customId } = interaction;
+    if (customId.startsWith("ticket")){
+      select_name = customId.split("-");
+      interaction.ticketId = select_name.pop();
+      select_name = select_name.join("-");
+    } else {
+      button_name = customId;
+    }
+
+    const select = client.commandsFiles.get(select_name);
     if (select) select.run(client, interaction);
 
     //Logs
     let contents = {
       'Type': "Select interaction",
       'Author': interaction.user.username,
-      'Channel': interaction.channel.name,
-      'Cmd': interaction.commandName
+      'Channel': interaction.channel?.name,
+      'Cmd': select_name
     }
-    client.console.table(contents);
+    console.table(contents);
   }
 });

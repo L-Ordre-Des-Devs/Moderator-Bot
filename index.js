@@ -5,6 +5,7 @@ const {
     } 
 } = require("@discordjs/ws");
 const { WebhookConsole } = require("discord-webhook-console");
+const { PrismaClient } = require('@prisma/client');
 // To show the bot on mobile :D (method from : https://stackoverflow.com/a/77072376)
 identifyProperties.browser = "Discord Android";
 
@@ -19,6 +20,8 @@ let client = new Client({
 });
 
 client.console = new WebhookConsole(process.env.WEBHOOK_LOG);
+client.prisma = new PrismaClient();
+client.reviewCache = new Map();
 module.exports = client;
 
 // Global Variables
