@@ -19,13 +19,13 @@ let client = new Client({
     ]
 });
 
+// Global Variables
 client.console = new WebhookConsole(process.env.WEBHOOK_LOG);
 client.prisma = new PrismaClient();
 client.reviewCache = new Map();
-module.exports = client;
-
-// Global Variables
 client.commandsFiles = new Collection();
+
+module.exports = client;
 
 // Initializing the project
 require("./handler")(client);
