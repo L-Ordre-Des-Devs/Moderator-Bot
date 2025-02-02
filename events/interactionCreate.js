@@ -9,40 +9,41 @@ client.on("interactionCreate", async (interaction) => {
 
     // Slash Command Handling
     if (interaction.isChatInputCommand()) {
-        SlashCommandHandler();
+        SlashCommandHandler(interaction);
         return;
     }
 
     // Context Menu Handling
     if (interaction.isContextMenuCommand()) {
-        ContextMenuHandler();
+        ContextMenuHandler(interaction);
         return;
     }
 
     // Modal Handling
     if (interaction.isModalSubmit()) {
-        ModalHandler();
+        ModalHandler(interaction);
         return;
     }
 
     // Button Handling
     if (interaction.isButton()) {
-        ButtonHandler();
+        ButtonHandler(interaction);
         return;
     }
 
     // Select Handling
     if (interaction.isStringSelectMenu()) {
-        SelectHandler();
+        SelectHandler(interaction);
         return;
     }
 });
 
 /**
  * Handler for slash commands
+ * @param {ChatInputCommandInteraction} interaction The slash command interaction 
  * @returns {Promise<InteractionCallbackResponse>} reply
  */
-function SlashCommandHandler() {
+function SlashCommandHandler(interaction) {
     const cmd = client.commandsFiles.get(interaction.commandName);
     if (!cmd)
         return interaction.reply({ content: "An error has occured", ephemeral: true });
@@ -74,8 +75,9 @@ function SlashCommandHandler() {
 
 /**
  * Handler for context menus
+ * @param {ContextMenuCommandInteraction} interaction The context menu interaction
  */
-async function ContextMenuHandler() {
+async function ContextMenuHandler(interaction) {
     await interaction.deferReply({ ephemeral: false });
     const command = client.commandsFiles.get(interaction.commandName);
     if (command) command.run(client, interaction);
@@ -92,8 +94,9 @@ async function ContextMenuHandler() {
 
 /**
  * Handler for modals
+ * @param {ModalSubmitInteraction} interaction The modal interaction
  */
-function ModalHandler() {
+function ModalHandler(interaction) {
     let modal_name;
     const { customId } = interaction;
     if (customId.startsWith("ticket")) {
@@ -119,8 +122,9 @@ function ModalHandler() {
 
 /**
  * Handler for buttons
+ * @param {ButtonInteraction} interaction The button interaction 
  */
-function ButtonHandler() {
+function ButtonHandler(interaction) {
     let button_name;
     const { customId } = interaction;
     if (customId.startsWith("ticket")) {
@@ -146,8 +150,9 @@ function ButtonHandler() {
 
 /**
  * Handler for selects
+ * @param {StringSelectMenuInteraction} interaction The select interaction 
  */
-function SelectHandler() {
+function SelectHandler(interaction) {
     let select_name;
     const { customId } = interaction;
     if (customId.startsWith("ticket")) {
