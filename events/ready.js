@@ -11,7 +11,7 @@ const ticketConfig = require('../configuration/tickets.json');
 client.on("ready", async () => {
     Init();
 
-    
+    TicketInit();
 });
 
 /**
