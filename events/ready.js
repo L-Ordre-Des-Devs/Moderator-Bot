@@ -9,10 +9,25 @@ const {
 const ticketConfig = require('../configuration/tickets.json');
 
 client.on("ready", async () => {
+    Init();
+
+    
+});
+
+/**
+ * Init
+ */
+function Init() {
     client.console.log(`Logged in as ${client.user.tag}!`);
     console.log("✅");
     client.user.setActivity(`May the </> be with you!`, {type: ActivityType.Custom});
+}
 
+/**
+ * Init for tickets
+ * @returns {void} void
+ */
+async function TicketInit() {
     try {
         const channel = client.channels.cache.get(ticketConfig.ticketPanelChannel);
         if (!channel) return;
@@ -60,4 +75,4 @@ client.on("ready", async () => {
     } catch (err) {
         client.console.error('Error loading tickets:', err);
     }
-});
+}
