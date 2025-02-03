@@ -1,3 +1,4 @@
 node_modules/
 .env
 commands/slash/test.js
+configuration/
