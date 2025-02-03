@@ -44,7 +44,9 @@ async function TicketInit() {
             const embed = new EmbedBuilder()
                 .setTitle(ticketConfig.panelConfig.title)
                 .setDescription(ticketConfig.panelConfig.description)
-                .setColor(ticketConfig.panelConfig.color);
+                .setColor(ticketConfig.panelConfig.color)
+                .setImage(ticketConfig.panelConfig.banner)
+                .setThumbnail(ticketConfig.panelConfig.thumbnail);
     
             const row = new ActionRowBuilder().addComponents(
                 ...Object.entries(ticketConfig.templates).map(([key, tpl]) => (

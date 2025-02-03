@@ -86,7 +86,7 @@ module.exports = {
         // Créer un embed de bienvenue dans le salon de ticket
         const tpl = ticketConfig.templates[type] || ticketConfig.templates['general'];
         const embed = new EmbedBuilder()
-            .setColor(tpl.color || '#2b2d31')
+            .setColor(tpl.color || '#2B2D31')
             .setTitle(`${tpl.emoji || '🎫'} Ticket #${ticketId}`)
             .setDescription(`Ticket créé par <@${interaction.user.id}>.\n\n**Raison** : ${openReason}`)
             .setTimestamp();
@@ -95,11 +95,13 @@ module.exports = {
         const row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
                 .setCustomId(`ticket-claim-${ticketId}`)
-                .setLabel('🛎️ Claim')
+                .setLabel('Claim')
+                .setEmoji('🛎️')
                 .setStyle(ButtonStyle.Success),
             new ButtonBuilder()
                 .setCustomId(`ticket-close-${ticketId}`)
-                .setLabel('❌ Fermer')
+                .setLabel('Fermer')
+                .setEmoji('<:cross:1163970998605983848>')
                 .setStyle(ButtonStyle.Danger)
         );
 

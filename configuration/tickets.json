@@ -5,25 +5,33 @@
     "logsChannel": "1085574586051080242",
     "maxTicketsPerUser": 5,
     "panelConfig": {
-        "title": "Support Ticket",
-        "description": "Choisissez le type de ticket souhaité :",
-        "color": "#5865F2",
-        "buttonStyle": "Primary"
+        "title": "Contacter le staff",
+        "description": "Ouvrez un ticket pour toute demande concernant le serveur (Partenariat, litige avec un autre membre, litige avec un membre du staff, etc...)",
+        "color": "#2B2D31",
+        "banner": "https://cdn.discordapp.com/banners/706640777450881114/a_00b2982dfa1767e2ed70fae68d206d90.gif?size=4096",
+        "thumbnail": "https://i.imgur.com/Zdk5e8z.png"
     },
     "templates": {
         "general": {
-            "name": "Assistance Générale",
-            "description": "Problèmes divers",
+            "name": "Ouvrir un ticket !",
+            "description": "Demande de renseignements général.",
             "emoji": "<:ticket:1165448228444065893>",
-            "color": "#5865F2",
+            "color": "#2B2D31",
             "buttonStyle": "Primary"
         },
-        "support": {
-            "name": "Support Technique",
-            "description": "Aide technique",
-            "emoji": "⚙️",
-            "color": "#FEE75C",
+        "partner": {
+            "name": "Demande de partenariat",
+            "description": "Nous sommes ouvert aux partenariats (pas d'échange de pub s'il vous plait)",
+            "emoji": "<:aide:1165453984425840781>",
+            "color": "#5865F1",
             "buttonStyle": "Secondary"
+        },
+        "report": {
+            "name": "Faire un signalement",
+            "description": "Signalez nous tout comportement enfreignant le règlement du serveur.",
+            "emoji": "<:security:1221885727399219210>",
+            "color": "#E74C3C",
+            "buttonStyle": "Danger"
         }
     }
   }
