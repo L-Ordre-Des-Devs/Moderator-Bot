@@ -1,4 +1,5 @@
 const client = require("../index");
+const { console } = client;
 const {
    ActivityType,
    EmbedBuilder,
@@ -18,8 +19,7 @@ client.on("ready", async () => {
  * Init
  */
 function Init() {
-    client.console.log(`Logged in as ${client.user.tag}!`);
-    console.log("✅");
+    console.log(`Logged in as ${client.user.tag}!`);
     client.user.setActivity(`May the </> be with you!`, {type: ActivityType.Custom});
 }
 
@@ -28,9 +28,10 @@ function Init() {
  * @returns {void} void
  */
 async function TicketInit() {
+    console.log("Init ticket system");
     try {
         const channel = client.channels.cache.get(ticketConfig.ticketPanelChannel);
-        if (!channel) return;
+        if (!channel) return console.error("No channel found");
 
         // Vérifier si un panel existe déjà
         const messages = await channel.messages.fetch({ limit: 10 });
