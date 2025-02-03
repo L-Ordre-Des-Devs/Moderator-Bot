@@ -1,9 +1,10 @@
 const client = require("../index");
 const { console } = client;
+const { GuildMemberFlags } = require("discord.js");
 
 client.on("guildMemberUpdate", async (oldMember, newMember) => {
     // si l'ancien pending est différent du nouveau que le nouveau est false
-    if (oldMember.pending !== newMember.pending && !newMember.pending) {
+    if (!oldMember.flags.has(GuildMemberFlags.CompletedOnboarding) && newMember.flags.has(GuildMemberFlags.CompletedOnboarding)) {
         Welcome(newMember);
     }
 });
@@ -37,7 +38,7 @@ function Welcome(member) {
 
     let content = {
         message: "New member",
-        member: member.username,
+        member: member.user.username,
     };
     console.table(content);
 }
