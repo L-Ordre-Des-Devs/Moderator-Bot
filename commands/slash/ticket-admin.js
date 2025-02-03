@@ -16,6 +16,7 @@ module.exports = {
    */
   run: async(client, interaction, args) => {
     await interaction.deferReply({ ephemeral: true });
+    const { prisma } = client;
 
     // Récupérer tous les tickets "open" ou "claimed" depuis la DB
     const tickets = await prisma.ticket.findMany({
