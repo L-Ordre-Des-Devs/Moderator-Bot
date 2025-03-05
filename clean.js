@@ -5,7 +5,7 @@ const { WebhookConsole } = require("discord-webhook-console");
 const fs = require("fs");
 const token = process.env.TOKEN;
 const guild = process.env.GUILD_ID;
-//const console = new WebhookConsole(process.env.WEBHOOK_LOG);
+const console = new WebhookConsole(process.env.WEBHOOK_LOG);
 const baseURL = "https://discord.com/api/v10/";
 const headers = {
     "Authorization": "Bot "+token,
@@ -103,6 +103,7 @@ async function get_messages(thread_id, last_message_id) {
 }
 
 (async () => {
+    console.log("Starting cleaning...");
     let deleted_count = 0;
     /* --- First: check threads saved in config --- */
     // for all threads visited
