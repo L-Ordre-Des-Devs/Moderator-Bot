@@ -1,3 +1,6 @@
+/**
+ * author: Mizari (Mizari-Dev)
+ */
 const client = require("../index");
 const { GatewayIntentBits, PermissionFlagsBits, Client } = require("discord.js");
 const { console, prisma } = client;

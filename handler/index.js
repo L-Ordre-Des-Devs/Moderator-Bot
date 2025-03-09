@@ -1,3 +1,6 @@
+/**
+ * author: Mizari (Mizari-Dev)
+ */
 const { glob } = require("glob");
 const { Client, ApplicationCommandType } = require("discord.js");
 

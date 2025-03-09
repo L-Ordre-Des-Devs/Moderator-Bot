@@ -1,5 +1,5 @@
 /*
- * author : Mizari (Mizari-W)
+ * author : Mizari (Mizari-Dev)
  */
 const { ApplicationCommandType, ApplicationCommandOptionType, PermissionsBitField } = require("discord.js");
 

@@ -1,3 +1,6 @@
+/**
+ * author: Mizari (Mizari-Dev)
+ */
 const { ApplicationCommandOptionType, InteractionType } = require("discord.js");
 const client = require("../index");
 const { console } = client;

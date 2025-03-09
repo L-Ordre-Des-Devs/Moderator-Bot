@@ -1,5 +1,5 @@
 /*
- * author : Syxles (Syxless) & Mizari (Mizari-W)
+ * author : Syxles (Syxless) & Mizari (Mizari-Dev)
  */
 const { ApplicationCommandType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, PermissionsBitField } = require("discord.js");
 

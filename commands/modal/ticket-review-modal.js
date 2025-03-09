@@ -1,5 +1,5 @@
 /*
- * author : Syxles (Syxless) & Mizari (Mizari-W)
+ * author : Syxles (Syxless) & Mizari (Mizari-Dev)
  */
 const { ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, EmbedBuilder } = require("discord.js");
 const ticketConfig = require('../../configuration/tickets.json');

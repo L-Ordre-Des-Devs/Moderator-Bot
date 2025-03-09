@@ -1,3 +1,6 @@
+/**
+ * author: Mizari (Mizari-Dev)
+ */
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { 
     DefaultWebSocketManagerOptions: { 

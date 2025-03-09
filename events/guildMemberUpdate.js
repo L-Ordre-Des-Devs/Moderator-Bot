@@ -1,3 +1,6 @@
+/**
+ * author: Mizari (Mizari-Dev)
+ */
 const client = require("../index");
 const { console } = client;
 const { GuildMemberFlags } = require("discord.js");
