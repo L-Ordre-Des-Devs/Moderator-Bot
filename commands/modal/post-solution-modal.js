@@ -13,6 +13,7 @@ module.exports = {
      * @param {CommandInteraction} interaction
      */
     run: async (client, interaction) => {
+        const { console } = client;
         /* Send solution */
         const solution = interaction.fields.fields.get("details").value;
         let msg = await interaction.reply({ content: "**Solution :**\n"+solution, withResponse: true });
@@ -33,12 +34,12 @@ module.exports = {
         await msg.edit({
             content: msg.content,
             components: [new ActionRowBuilder({ components: cpnts })]
-        });
+        }).catch(e => console.error("Pas pu désactiver les boutons :", e));
         /* Mettre le tag */
-        await interaction.channel.setAppliedTags([tags[interaction.channel.parentId]]);
+        await interaction.channel.setAppliedTags([tags[interaction.channel.parentId]]).catch(e => console.error("Pas pu appliquer le tag :", e));
         /* Lock le poste */
-        await interaction.channel.setLocked(true);
+        await interaction.channel.setLocked(true).catch(e => console.error("Pas pu lock le poste :", e));
         /* Close le poste */
-        await interaction.channel.setArchived(true);
+        await interaction.channel.setArchived(true).catch(e => console.error("Pas pu archiver le poste :", e));
     }
 }

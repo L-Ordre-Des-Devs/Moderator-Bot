@@ -12,6 +12,7 @@ module.exports = {
      * @param {CommandInteraction} interaction
      */
     run: async (client, interaction) => {
+        const { console } = client;
         if (interaction.channel.ownerId !== interaction.user.id)
             return interaction.reply({ content: {
                 "fr": "Vous n'êtes pas l'owner de ce poste."
@@ -34,6 +35,6 @@ module.exports = {
                 })
             ]
         });
-        interaction.showModal(modal);
+        interaction.showModal(modal).catch(e => console.error("Le modal s'est pas affiché :", e));
     }
 }
