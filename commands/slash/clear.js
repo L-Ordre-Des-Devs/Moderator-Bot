@@ -5,11 +5,13 @@ const { ApplicationCommandType, ApplicationCommandOptionType, PermissionsBitFiel
 
 module.exports = {
   name: "clear",
-  description: "Delete some messages",
+  description: "Delete some messages.",
+  descriptionLocalizations: {fr: "Supprime plusieurs messages."},
   options: [
     {
       name: "number",
-      description: "The number of messages you want to delete",
+      description: "The number of messages you want to delete.",
+      descriptionLocalizations: {fr: "Le nombre de message que vous voulez supprimer."},
       type: ApplicationCommandOptionType.Integer,
       required: true,
       max_value: 50
