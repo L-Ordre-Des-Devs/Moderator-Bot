@@ -10,12 +10,12 @@
   "author": "Mizari",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^6.3.0",
+    "@prisma/client": "^6.19.3",
     "discord-html-transcripts": "^3.2.0",
     "discord-webhook-console": "^1.0.1",
-    "discord.js": "^14.14.1",
+    "discord.js": "^14.26.4",
     "dotenv": "^16.4.7",
     "glob": "^11.0.0",
-    "prisma": "^6.3.0"
+    "prisma": "^6.19.3"
   }
 }
