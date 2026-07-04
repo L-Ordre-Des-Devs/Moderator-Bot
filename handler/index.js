@@ -11,14 +11,14 @@ module.exports = async (client) => {
 
     // Events
     const eventFiles = await glob(`events/*.js`);
-    eventFiles.map((value) => require("../"+value));
+    eventFiles.map((value) => require("../" + value));
 
     // Commands
-    const commandsFiles = await glob(`commands/*/*.js`);
+    const commandsFiles = await glob(`commands/**/*.js`);
 
     const arrayOfSlashCommands = [];
     await commandsFiles.map(async (value) => {
-        const file = require("../"+value);
+        const file = require("../" + value);
         if (!file?.name) return;
         await client.commandsFiles.set(file.name, file);
 
@@ -27,7 +27,7 @@ module.exports = async (client) => {
             ApplicationCommandType.User,
             ApplicationCommandType.ChatInput
         ].includes(file.type))
-            await arrayOfSlashCommands.push(file);
+            await arrayOfSlashCommands.push(file.data?.toJSON?.() ?? file);
     });
 
     client.on("ready", async () => {
