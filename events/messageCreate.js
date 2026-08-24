@@ -10,7 +10,7 @@ const GREETING_REACTION_EMOJI = process.env.GREETING_REACTION_EMOJI
 client.on("messageCreate", async (message) => {
 
     // Greeting reaction
-    if (GREETING_WORDS.some((word) => message.content.toLowerCase().includes(word))) {
+    if (GREETING_WORDS.some((word) => message.content.toLowerCase().split(" ").includes(word))) {
         GreetingReaction(message);
     }
 
